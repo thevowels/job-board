@@ -12,8 +12,11 @@ class JobController extends Controller
      */
     public function index()
     {
+        $jobs = Job::query();
+        $jobs->when(request('search'), function ($query) { $query->where('title', 'like', '%' . request('search') . '%')
+        ->orWhere('description', 'like', '%' . request('search') . '%'); });
         return view('jobs.index', [
-            'jobs' => Job::all(),
+            'jobs' => $jobs->get(),
         ]);
     }
 
