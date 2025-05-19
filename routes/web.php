@@ -13,7 +13,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('jobs', JobController::class)
-        ->only(['index'])
+        ->only(['index', 'show'])
         ->middleware(['auth', 'verified']);
 
 Route::middleware('auth')->group(function () {
