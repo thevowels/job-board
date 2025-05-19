@@ -10,20 +10,31 @@
                             <div class="mb-1 font-semibold">
                                 Search
                             </div>
-                            <x-form-text-input name="search" value="" placeholder="Search for any Text"/>
+                            <x-form-text-input name="search" value="{{request('search')}}" placeholder="Search for any Text"/>
                         </div>
                         <div>
                             <div class="mb-1 font-semibold">
                                 Salary
                             </div>
                             <div class="flex space-x-2">
-                                <x-form-text-input name="min_salary" value="" placeholder="From"/>
-                                <x-form-text-input name="max_salary" value="" placeholder="To"/>
-
+                                <x-form-text-input name="min_salary" value="{{request('min_salary')}}" placeholder="From"/>
+                                <x-form-text-input name="max_salary" value="{{request('max_salary')}}" placeholder="To"/>
                             </div>
                         </div>
-                        <div>Column 1</div>
-                        <div>Column 1</div>
+                        <div>
+                            <div class="mb-1 font-semibold">
+                                Experience
+                            </div>
+                            <x-radio-group name="experience"
+                                           :options="array_combine(array_map('ucfirst',\App\Models\Job::$experience), \App\Models\Job::$experience)"/>
+                        </div>
+                        <div>
+                            <div class="mb-1 font-semibold">
+                                Category
+                            </div>
+                            <x-radio-group name="category"
+                                           :options="array_combine(array_map('ucfirst',\App\Models\Job::$category), \App\Models\Job::$category)"/>
+                        </div>
                     </div>
                     <div>
                         <x-primary-button class="w-full justify-center"> Filter</x-primary-button>
