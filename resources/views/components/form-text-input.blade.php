@@ -1,4 +1,6 @@
-<div class="relative" x-data>
+<div
+    class="relative flex-grow"
+    x-data>
     @if($formRef)
     <button type="button" class="absolute top-0 right-0 flex h-full items-center pr-2"
         @click="$refs['input-{{$name}}'].value=''; $refs['{{$formRef}}'].submit();">
@@ -7,13 +9,13 @@
         </svg>
     </button>
     @endif
-    <input type="text"
+    <input
            x-ref="input-{{$name}}"
            placeholder="{{$placeholder }}"
            name="{{ $name }}"
            value="{{ $value }}"
            id="{{$name}}"
-           class="w-full pr-8 rounded-md border-0 py-1.5 px-2.5 text-sm ring-1 ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-slate-400"
+           {{$attributes->merge(['class' =>"w-full pr-8 rounded-md border-0 py-1.5 px-2.5 text-sm ring-1 ring-slate-300 placeholder:text-slate-400 focus:ring-2 focus:ring-slate-400" ])}}
            />
 
 </div>

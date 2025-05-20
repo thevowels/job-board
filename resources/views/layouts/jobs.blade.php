@@ -17,6 +17,8 @@
 <body class="font-sans antialiased">
 <div class="min-h-screen bg-gradient-to-r from-indigo-100 from-10% via-sky-100 via-30% to-emerald-100 to-90%">
 
+    @include('layouts.navigation')
+
     <!-- Page Heading -->
     @isset($header)
         <header class="bg-white shadow">
@@ -27,8 +29,19 @@
     @endisset
 
     <!-- Page Content -->
-    <main>
-        <div class="max-w-2xl mx-auto text-gray-900">
+    <main >
+        <div class="max-w-2xl mx-auto pt-4 text-gray-900">
+            @if(session('success'))
+
+                <div role="alert" class="my-8 rounded-md border-l-4 border-green-300 bg-green-100 p-4  text-green-700 opacity-75">
+                    <p class="font-bold ">
+                        Success!
+                    </p>
+                    <p>{{session('success')}}</p>
+                </div>
+            @endif
+
+            {{auth()->user()->name ?? 'Guest'}}
             {{ $slot }}
         </div>
     </main>

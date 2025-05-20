@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
-class JobController extends Controller
+class JobController extends \Illuminate\Routing\Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        Gate::authorize('viewAny', Job::class);
         $filters = request()->only(
             'search',
             'min_salary',
@@ -20,7 +22,7 @@ class JobController extends Controller
             'category',
         );
         return view('jobs.index', [
-            'jobs' => Job::filter($filters)->get(),
+            'jobs' => Job::filter($filters)->paginate(),
         ]);
     }
 

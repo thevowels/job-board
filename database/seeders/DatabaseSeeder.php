@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Employer;
 use App\Models\Job;
+use App\Models\JobApplication;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Database\Factories\EmployerFactory;
@@ -23,14 +24,22 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
+        $users = User::all();
         Employer::factory(User::all()->count())
             ->state( new Sequence(
-                fn (Sequence $sequence) => ['user_id' => User::all()->random()->id],
+                fn (Sequence $sequence) => ['user_id' => $users->random()->id],
             ))
             ->create();
         $employers = Employer::all();
         Job::factory(600)
             ->recycle($employers)
             ->create();
+        $jobs = Job::all();
+        foreach ($users as $user) {
+            JobApplication::factory(4)
+                ->recycle($jobs)
+                ->for($user)
+                ->create();
+        }
     }
 }
