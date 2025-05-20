@@ -22,6 +22,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('jobs.applications', JobApplicationController::class)->only(['create', 'store']);
+    Route::resource('my-job-applications', \App\Http\Controllers\MyJobApplicationsController::class)
+        ->only(['index', 'destroy']);
 
 });
 

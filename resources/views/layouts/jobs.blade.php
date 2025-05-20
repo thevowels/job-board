@@ -40,8 +40,9 @@
                     <p>{{session('success')}}</p>
                 </div>
             @endif
-
-            {{auth()->user()->name ?? 'Guest'}}
+            <a href="{{route('my-job-applications.index')}}">
+                {{auth()->user()->name ?? 'Guest'}}: Applications
+            </a>
             {{ $slot }}
         </div>
     </main>
