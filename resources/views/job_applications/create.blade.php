@@ -13,12 +13,12 @@
         <form action="{{route('jobs.applications.store', $job)}}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-4  items-center ">
-                <label for="expected_salary" class="mb-2 block text-sm font-medium text-slate-900">Expected Salary</label>
+                <x-label for="expected_salary" required>Expected Salary</x-label>
                 <x-form-text-input type="number" name="expected_salary" class="flex-grow"/>
 
             </div>
             <div class="mb-4">
-                <label class="">Upload CV</label>
+                <x-label required >Upload CV</x-label>
                 <x-form-text-input type="file" name="cv"/>
             </div>
             <x-button class="w-full">
