@@ -19,6 +19,7 @@ class MyJobController extends Controller
             'jobs' => auth()->user()
                 ->employer
                 ->jobs()
+                ->withTrashed()
                 ->with(['employer', 'jobApplications', 'jobApplications.user'])
                 ->get()
 
@@ -53,5 +54,13 @@ class MyJobController extends Controller
 
         return redirect()->route('my-jobs.index')
             ->with('success','Job updated successfully.');
+    }
+
+    public function destroy(Job $myJob)
+    {
+        Gate::authorize('delete', $myJob);
+        $myJob->delete();
+        return redirect()->route('my-jobs.index')
+            ->with('success','Job deleted successfully.');
     }
 }
