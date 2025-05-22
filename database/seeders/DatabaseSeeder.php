@@ -18,23 +18,28 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-         User::factory(100)->create();
-
         User::factory()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
-        $users = User::all();
-        Employer::factory(User::all()->count())
-            ->state( new Sequence(
-                fn (Sequence $sequence) => ['user_id' => $users->random()->id],
-            ))
-            ->create();
+
+        $users = User::factory(100)->create();
+
+//        Employer::factory(User::all()->count())
+//            ->state( new Sequence(
+//                fn (Sequence $sequence) => ['user_id' => $users->random()->id],
+//            ))
+//            ->create();
+        $users = $users->shuffle();
+        foreach ($users as $user) {
+            Employer::factory()->for($user)->create();
+        }
         $employers = Employer::all();
         Job::factory(600)
             ->recycle($employers)
             ->create();
-        $jobs = Job::all();
+        $jobs = Job::all()->shuffle();
+        $users = $users->shuffle();
         foreach ($users as $user) {
             JobApplication::factory(4)
                 ->recycle($jobs)

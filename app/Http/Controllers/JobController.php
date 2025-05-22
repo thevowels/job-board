@@ -22,7 +22,7 @@ class JobController extends \Illuminate\Routing\Controller
             'category',
         );
         return view('jobs.index', [
-            'jobs' => Job::filter($filters)->paginate(),
+            'jobs' => Job::filter($filters)->latest()->paginate(),
         ]);
     }
 

@@ -19,7 +19,14 @@ class Job extends Model
     protected $table = 'my_jobs';
     public static array $experience = ['entry', 'intermediate', 'senior'];
     public static array $category = ['IT', 'Finance', 'Marketing', 'HR'];
-
+    protected $fillable = [
+        'title',
+        'location',
+        'salary',
+        'description',
+        'experience',
+        'category',
+    ];
     protected $with=[];
     public function employer(): BelongsTo
     {

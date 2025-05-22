@@ -11,7 +11,7 @@
             </button>
         @endif
         <textarea
-            name="{{ $name }}"
+            name="{{$name}}"
             id="{{$name}}"
             @class([
                  'w-full rounded-md border-0 py-1.5 px-2.5 text-sm ring-1 placeholder:text-slate-400',
@@ -19,9 +19,7 @@
                  'ring-slate-300' => !$errors->has($name),
                  'ring-red-500' => $errors->has($name)
              ])
-        >
-            {{old($name, $value)}}
-        </textarea>
+        >{{old($name, $value)}}</textarea>
 
     @else
         @if($formRef)
