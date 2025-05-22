@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
         ->only(['index', 'destroy']);
     Route::resource('employer', EmployerController::class)
         ->only(['create', 'store']);
-    Route::resource('my-jobs', MyJobController::class)->only('index','create','store')->middleware(['employer']);
+    Route::resource('my-jobs', MyJobController::class)->only('index','create','store','edit', 'update')->middleware(['employer']);
 
 });
 

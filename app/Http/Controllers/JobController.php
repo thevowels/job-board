@@ -47,6 +47,7 @@ class JobController extends \Illuminate\Routing\Controller
      */
     public function show(Job $job)
     {
+        Gate::authorize('view', $job);
         return view('jobs.show', [
             'job' => $job->load('employer'),
         ]);
